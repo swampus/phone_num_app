@@ -4,9 +4,9 @@ import rx.Observable;
 
 public interface IStorage {
 
-	String UNKNOWN_COUNTRY = "Unknown";
+    String UNKNOWN_COUNTRY = "Unknown";
 
-	Observable<Void> putPhone(String phoneCode, String country);
+    Observable<Void> putPhone(String phoneCode, String country);
 
-	Observable<String> getCountry(String phoneCode);
+    Observable<String> getCountry(String phoneCode);
 }

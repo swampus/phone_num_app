@@ -1,8 +1,9 @@
 package load.phone.app.controller;
 
 import com.google.common.annotations.VisibleForTesting;
-import load.phone.app.controller.request.CountryByPhoneNumRequest;
-import load.phone.app.controller.request.CountryByPhoneNumResponse;
+import load.phone.app.controller.rest.CountryByPhoneNumRequest;
+import load.phone.app.controller.rest.CountryByPhoneNumResponse;
+import load.phone.app.controller.rest.Response;
 import load.phone.app.service.FindCountryService;
 import load.phone.app.service.LoadWikiDataService;
 import load.phone.app.service.ParseService;
@@ -11,12 +12,7 @@ import load.phone.app.validator.PhoneNumValidator;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 
@@ -59,9 +55,8 @@ public class CountryController {
             headers = {"Accept=" + MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     @CrossOrigin(origins = "http://localhost:8080")
-    public CountryByPhoneNumResponse getCountryByPhoneNum(
+    public Response getCountryByPhoneNum(
             @RequestBody CountryByPhoneNumRequest countryByPhoneNumRequest) {
-
         String phoneNum = countryByPhoneNumRequest.getPhoneNum();
         return createCountryByPhoneNumResponse(phoneNum);
     }

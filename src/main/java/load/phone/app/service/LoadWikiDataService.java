@@ -10,19 +10,19 @@ import java.io.IOException;
 @Service
 public class LoadWikiDataService {
 
-	@Value("${wiki.url}")
-	private String wikiUrl;
+    @Value("${wiki.url}")
+    private String wikiUrl;
 
-	public Document getWikiPageContent() {
-		return createDocument();
-	}
+    public Document getWikiPageContent() {
+        return createDocument();
+    }
 
-	private Document createDocument() {
-		try {
-			return Jsoup.connect(wikiUrl).get();
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage() + " - can not load WIKI-html page with phone codes", e);
-		}
-	}
+    private Document createDocument() {
+        try {
+            return Jsoup.connect(wikiUrl).get();
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage() + " - can not load WIKI-html page with phone codes", e);
+        }
+    }
 
 }
