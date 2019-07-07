@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <title>jQuery client</title>
+  <script src="jquery-3.2.0.js"></script>
+
+
+</head>
+
+<body>
+
+
+ <br/>
+ <br/>
+ <br/>
+ 
+<div align="center" style="border:1px solid black;">
+<br/>
+<br/>
+<div id="resultDiv"></div>
+<br/>
+<br/>
+  <label>Phone number:</label>
+  <input type="text" id="phone_number" placeholder="Phone number..." value="">
+  <input type="button" id="send_button" name="send_button" value="Search">
+<br/>
+<br/>
+<br/>
+</div>
+
+ 
+
+<script>
+
+$(document).ready(function(){
+	
+    var connectionUrl = "http://localhost:8080/phoneByNum";
+    
+    $("#send_button").click(function(){
+	var phoneNum = $("#phone_number").val();
+
+	$.ajax({
+        type: "POST",
+        url: connectionUrl,
+        dataType: "json",
+        async: false,
+        crossDomain:true,
+        data: JSON.stringify(phoneNum),
+		contentType : "application/json",
+		success:function(result){
+            $("#resultDiv").html(result.country);
+        },
+        error:function(xhr,status,error){
+	   try {	
+		 jdata = $.parseJSON(xhr.responseText);  
+		 $("#resultDiv").html(JSON.parse(xhr.responseText).message);
+	       }catch(e){ 
+		  $("#resultDiv").html("Unknown response format. Check connection to server. ( " + connectionUrl + ")" );
+	       }
+        }
+    });
+	});
+});
+
+</script>
+
+ 
+
+</body>
+
+</html>
+
